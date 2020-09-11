@@ -7,7 +7,8 @@ def main():
     strFirst = input(YELLOW)
     output("Input second string:", TURQUOISE)  # Row
     strSecond = input(YELLOW)
-    LevenshteinDistance(strFirst, strSecond)
+    # LevenshteinDistance(strFirst, strSecond)
+    print("Result: ", LevenshteinDistanceRecursion(strFirst, strSecond))
 
 
 if __name__ == "__main__":
