@@ -3,12 +3,24 @@ from color import *
 
 
 def main():
-    output("Input first string:", TURQUOISE)  # Column
+    output("Введите первую строку:", GREEN)  # Column
     strFirst = input(YELLOW)
-    output("Input second string:", TURQUOISE)  # Row
+    output("Введите вторую строку:", GREEN)  # Row
     strSecond = input(YELLOW)
-    # LevenshteinDistance(strFirst, strSecond)
-    print("Result: ", LevenshteinDistanceRecursion(strFirst, strSecond))
+    # output("Выбор алгоритма:\
+    # 1. Расстояние Левенштейна(Матричный алгоритм)\
+    # 2. Расстояние Левенштейна(Рекурсивный алгоритм)\
+    # 3. Расстояние Дамерау - Левенштейна(Матричный алгоритм)\
+    # 4. Расстояние Дамерау-Левенштейна (Рекурсивный алгоритм)  ", TURQUOISE)  # Row
+    #     mode = input(YELLOW)
+
+    distanceLev = Levenshtein(strFirst, strSecond, True)
+    distanceDamLev = DamerauLevenshtein(strFirst, strSecond)
+
+    output("Расстояние Левенштейна: " + str(distanceLev), GREEN)
+
+    if distanceLev != distanceDamLev:
+        output("Расстояние Дамерау-Левенштейна: " + str(distanceDamLev), GREEN)
 
 
 if __name__ == "__main__":
