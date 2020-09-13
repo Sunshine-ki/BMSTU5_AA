@@ -40,7 +40,6 @@ def OutputMatrix(matrix, strFirst, strSecond):
 
     print("\n__________\n")
 
-
 def Levenshtein(strFirst, strSecond, flag=False):
     n, m = len(strFirst), len(strSecond)
     matrix = np.full((n + 1, m + 1), 0)  # math.inf)

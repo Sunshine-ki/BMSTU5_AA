@@ -1,5 +1,7 @@
 from algorithms import *
 from color import *
+import time
+import sys
 
 
 def TimeTest(strFirst, strSecond, countOperations):
@@ -31,8 +33,4 @@ def TimeTest(strFirst, strSecond, countOperations):
     print("Дамерау-Левенштейн (рекурсия)= ", t2 - t1)
 
 
-def tests():
-    TimeTest("alicefbmstuox", "qwertyhifox", 2000)
-
-
-tests()
+# sys.setrecursionlimit(1500)

@@ -1,30 +1,46 @@
-\documentclass[12pt]{report}
-\usepackage[utf8]{inputenc}
-\usepackage[russian]{babel}
-\usepackage{listings}
+%% Преамбула TeX-файла
 
-\usepackage{graphicx}
-\graphicspath{{./img/}}
+% 1. Стиль и язык
+\documentclass[utf8x, 12pt]{G7-32} % Стиль (по умолчанию будет 14pt)
 
-\include{settings}
+% Остальные стандартные настройки убраны в preamble.inc.tex.
+\include{preamble.inc}
+
+% Настройки листингов.
+\ifPDFTeX
+\include{listings.inc}
+\else
+\usepackage{local-minted}
+\fi
+
+% Полезные макросы листингов.
+\include{macros.inc}
 
 \begin{document}
-	
-\include{title_page}	
 
-\include{introduction}
+\frontmatter 
 
-\include{analysis}
+\include{00-abstract}
 
-\include{design}
+\tableofcontents
 
-\include{technical}
+\include{1-intro}
 
-%\include{research}
+\mainmatter % это включает нумерацию глав и секций в документе ниже
 
-\chapter*{Заключение}
-\addcontentsline{toc}{chapter}{Заключение}
-В этой лабораторной работе мы познакомились с алгоритмами Левенштейна и Дамерау-Левенштейна. Построили схемы, соответствующие данным алгоритмам, также разобрали рекуррентные реализации. Написали полностью готовый и протестированный программный продукт, который считает дистанцию 4 способами. 
-%Убедились, что алгоритм, реализованный с помощью рекурсии работает дольше, зато его преимущество в простоте написания.
+\include{2-analysis}
+\include{3-design}
+\include{4-impl}
+\include{5-research}
+
+
+\backmatter %% Здесь заканчивается нумерованная часть документа и начинаются ссылки и
+%% заключение
+
+\include{60-conclusion}
+
+\include{61-biblio}
+
+%\appendix   % Тут идут приложения
 
 \end{document}
