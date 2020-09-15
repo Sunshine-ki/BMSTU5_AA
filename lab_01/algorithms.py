@@ -3,7 +3,7 @@ import math
 import time
 
 
-def SeqEditOper(matrix):  # Sequence of editorial operations
+def SeqEditOper(matrix, str1, str2):  # Sequence of editorial operations
     result = list()
     i, j = len(matrix) - 1, len(matrix[0]) - 1
     while (i or j):
@@ -27,11 +27,35 @@ def SeqEditOper(matrix):  # Sequence of editorial operations
             if j:
                 j -= 1
 
+    result = result[::-1]
     print("\n    ", end="")
-    for i in range(len(result) - 1, -1, -1):
+    for i in range(len(result)):
         print("{:5}".format(result[i]), end="")
-
     print("\n__________\n")
+
+    i, j = 0, 0
+    for elem in result:
+        if elem == 'M':
+            i += 1
+            j += 1
+        elif elem == 'D':
+            str1 = str1[0:i] + str1[i + 1:]
+        elif elem == 'I':
+            str1 = str1[0:i] + str2[j] + str1[i:]
+            i += 1
+            j += 1
+        elif elem == 'R':
+            str1 = str1[0:i] + str2[j] + str1[i + 1:]
+            i += 1
+            j += 1
+
+        print(elem, ':', str1, ' ---> ', str2)
+    print()
+
+
+# str1 = "alice"
+# i = 4
+# print(str1[0:i] + 'Q' + str1[i + 1:])
 
 
 def OutputMatrix(matrix, strFirst, strSecond):
@@ -72,7 +96,7 @@ def Levenshtein(strFirst, strSecond, flag=False):
 
     if flag:
         OutputMatrix(matrix, strFirst, strSecond)
-        SeqEditOper(matrix)
+        SeqEditOper(matrix, strFirst, strSecond)
 
     return matrix[-1][-1]
 
