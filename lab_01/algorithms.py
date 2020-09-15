@@ -2,6 +2,8 @@ import numpy as np
 import math
 import time
 
+from color import *
+
 
 def SeqEditOper(matrix, str1, str2):  # Sequence of editorial operations
     result = list()
@@ -35,21 +37,22 @@ def SeqEditOper(matrix, str1, str2):  # Sequence of editorial operations
 
     i, j = 0, 0
     for elem in result:
-        if elem == 'M':
-            i += 1
-            j += 1
-        elif elem == 'D':
+        if elem == 'D':
             str1 = str1[0:i] + str1[i + 1:]
         elif elem == 'I':
             str1 = str1[0:i] + str2[j] + str1[i:]
-            i += 1
-            j += 1
         elif elem == 'R':
             str1 = str1[0:i] + str2[j] + str1[i + 1:]
+        if elem != 'D':
             i += 1
             j += 1
 
-        print(elem, ':', str1, ' ---> ', str2)
+        if elem in ['D', 'I', 'R']:  # Удаление, вставка, замена
+            print(GREEN, elem, YELLOW, end=': ')
+        else:
+            print(YELLOW, elem, YELLOW, end=': ')
+
+        print(str1, ' ---> ', str2)
     print()
 
 
