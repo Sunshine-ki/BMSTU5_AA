@@ -56,11 +56,6 @@ def SeqEditOper(matrix, str1, str2):  # Sequence of editorial operations
     print()
 
 
-# str1 = "alice"
-# i = 4
-# print(str1[0:i] + 'Q' + str1[i + 1:])
-
-
 def OutputMatrix(matrix, strFirst, strSecond):
     print("\n__________\n")
     print("\nMatrix:\n")
