@@ -3,23 +3,35 @@ import math
 import time
 
 
-# def SeqEditOper(matrix):  # Sequence of editorial operations
-#     # for i in range(len(matrix) - 1, -1, -1):
-#     #     for j in range(len(matrix[i]) - 1, -1, -1):
-#     #         print(matrix[i][j], end="")
-#     #     print()
-#     n, m = len(matrix) - 1, len(matrix[0]) - 1
-#     i, j = 0, 0
-#     flag = matrix[-1][-1]
-#     while flag:
-#         matrix[n - i][m - 1] # M
+def SeqEditOper(matrix):  # Sequence of editorial operations
+    result = list()
+    i, j = len(matrix) - 1, len(matrix[0]) - 1
+    while (i or j):
+        a, b, c = matrix[i - 1][j - 1], matrix[i - 1][j], matrix[i][j - 1]
 
-#         if b >= a <= c:
-#             print(a)
-#         elif a >= b <= c:
-#             print(b)
-#         else:
-#             print(c)
+        if b >= a <= c:
+            if a == matrix[i][j]:
+                result.append('M')
+            else:
+                result.append('R')
+            if j:
+                j -= 1
+            if i:
+                i -= 1
+        elif a >= b <= c:
+            result.append('D')
+            if i:
+                i -= 1
+        else:
+            result.append('I')
+            if j:
+                j -= 1
+
+    print("\n    ", end="")
+    for i in range(len(result) - 1, -1, -1):
+        print("{:5}".format(result[i]), end="")
+
+    print("\n__________\n")
 
 
 def OutputMatrix(matrix, strFirst, strSecond):
@@ -37,8 +49,8 @@ def OutputMatrix(matrix, strFirst, strSecond):
             else:
                 print(end=" ")
             print("{:4d}".format(matrix[i][j]), end="")
+    print()
 
-    print("\n__________\n")
 
 def Levenshtein(strFirst, strSecond, flag=False):
     n, m = len(strFirst), len(strSecond)
@@ -60,6 +72,7 @@ def Levenshtein(strFirst, strSecond, flag=False):
 
     if flag:
         OutputMatrix(matrix, strFirst, strSecond)
+        SeqEditOper(matrix)
 
     return matrix[-1][-1]
 
