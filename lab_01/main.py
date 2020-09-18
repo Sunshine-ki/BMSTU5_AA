@@ -22,6 +22,8 @@ def main():
     if distanceLev != distanceDamLev:
         output("Расстояние Дамерау-Левенштейна: " + str(distanceDamLev), GREEN)
 
+    LevenshteinRecursion(strFirst, strSecond)
+
 
 if __name__ == "__main__":
     main()

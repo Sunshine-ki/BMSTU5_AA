@@ -34,6 +34,11 @@ Linux. ---
 Ubuntu 18.04. ---
 \newblock 2018. \BibUrl{ https://releases.ubuntu.com/18.04/}.
 
+\bibitem{bib7}
+\selectlanguageifdefined{english}
+process time function in Python. \BibUrl{
+  https://www.geeksforgeeks.org/time-process_time-function-in-python/}.
+
 \bibitem{bib6}
 \selectlanguageifdefined{english}
 Замер памяти в Python3. ---
