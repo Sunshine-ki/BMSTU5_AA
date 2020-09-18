@@ -99,13 +99,7 @@ def Levenshtein(strFirst, strSecond, flag=False):
     return matrix[-1][-1]
 
 
-count = 0
-
-
 def LevenshteinRecursion(strFirst, strSecond):
-    global count
-    count += 1
-    print(count)
     if (strFirst == "" or strSecond == ""):
         return abs(len(strFirst) - len(strSecond))
 
