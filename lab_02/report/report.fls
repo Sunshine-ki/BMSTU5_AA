@@ -366,6 +366,12 @@ INPUT /home/lis/university/github/algorithm/lab_02/report/3-design.tex
 INPUT /home/lis/university/github/algorithm/lab_02/report/img/d1.png
 INPUT /home/lis/university/github/algorithm/lab_02/report/img/d1.png
 INPUT /home/lis/university/github/algorithm/lab_02/report/img/d1.png
+INPUT /home/lis/university/github/algorithm/lab_02/report/img/d2.png
+INPUT /home/lis/university/github/algorithm/lab_02/report/img/d2.png
+INPUT /home/lis/university/github/algorithm/lab_02/report/img/d2.png
+INPUT /home/lis/university/github/algorithm/lab_02/report/img/d3.png
+INPUT /home/lis/university/github/algorithm/lab_02/report/img/d3.png
+INPUT /home/lis/university/github/algorithm/lab_02/report/img/d3.png
 OUTPUT /home/lis/university/github/algorithm/lab_02/report/4-impl.aux
 INPUT /home/lis/university/github/algorithm/lab_02/report/4-impl.tex
 INPUT /home/lis/university/github/algorithm/lab_02/report/4-impl.tex
@@ -396,6 +402,8 @@ INPUT /home/lis/university/github/algorithm/lab_02/report/img/time1.png
 INPUT /home/lis/university/github/algorithm/lab_02/report/img/time2.png
 INPUT /home/lis/university/github/algorithm/lab_02/report/img/time2.png
 INPUT /home/lis/university/github/algorithm/lab_02/report/img/time2.png
+INPUT /usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-34.def
+INPUT /usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-34.def
 OUTPUT /home/lis/university/github/algorithm/lab_02/report/60-conclusion.aux
 INPUT /home/lis/university/github/algorithm/lab_02/report/60-conclusion.tex
 INPUT /home/lis/university/github/algorithm/lab_02/report/60-conclusion.tex
