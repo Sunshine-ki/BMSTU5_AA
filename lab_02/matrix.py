@@ -29,3 +29,6 @@ class Matrix:
 
     def __getitem__(self, index):
         return self.matrix[index]
+
+    def __setitem__(self, key, value):
+        self.matrix[key] = value
