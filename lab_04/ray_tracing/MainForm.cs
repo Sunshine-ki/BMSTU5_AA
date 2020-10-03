@@ -83,6 +83,14 @@ namespace Newton
 
 		}
 
+		public void func2(object obj)
+		{
+			Limit limit = (Limit)obj;
+			for (Int32 i = 0; i < (int)SizeObjects.WidthCanvas; i++)
+				for (Int32 j = limit.begin; j < limit.end; j++)
+					_img.SetPixel(i, j, TraceRay(new Point(i, j)));
+		}
+
 		private void DrawScene()
 		{
 			List<Thread> listThread = new List<Thread>();
@@ -104,12 +112,6 @@ namespace Newton
 			}
 
 			_imgBox.Image = _img;
-
-			// for (Int32 i = 0; i < (int)SizeObjects.WidthCanvas; i++)
-			// 	for (Int32 j = 0; j < (int)SizeObjects.HeightCanvas; j++)
-			// 		_img.SetPixel(i, j, TraceRay(new Point(i, j)));
-			// _imgBox.Image = _img;
-
 		}
 
 		private Color TraceRay(Point point)
