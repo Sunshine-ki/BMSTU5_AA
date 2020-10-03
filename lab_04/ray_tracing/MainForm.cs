@@ -74,16 +74,15 @@ namespace Newton
 		}
 
 
-		public void func(object obj)
+		public void FuncHorizontally(object obj)
 		{
 			Limit limit = (Limit)obj;
 			for (Int32 i = limit.begin; i < limit.end; i++)
 				for (Int32 j = 0; j < (int)SizeObjects.HeightCanvas; j++)
 					_img.SetPixel(i, j, TraceRay(new Point(i, j)));
-
 		}
 
-		public void func2(object obj)
+		public void FuncVertically(object obj)
 		{
 			Limit limit = (Limit)obj;
 			for (Int32 i = 0; i < (int)SizeObjects.WidthCanvas; i++)
@@ -91,14 +90,23 @@ namespace Newton
 					_img.SetPixel(i, j, TraceRay(new Point(i, j)));
 		}
 
+		private void FuncTrace()
+		{
+			for (Int32 i = 0; i < (int)SizeObjects.WidthCanvas; i++)
+				for (Int32 j = 0; j < (int)SizeObjects.HeightCanvas; j++)
+					_img.SetPixel(i, j, TraceRay(new Point(i, j)));
+
+			_imgBox.Image = _img;
+		}
+
 		private void DrawScene()
 		{
 			List<Thread> listThread = new List<Thread>();
 
-			int step = 50;
+			int step = 200;
 			for (int i = 0; i < (int)SizeObjects.WidthCanvas; i += step)
 			{
-				listThread.Add(new Thread(new ParameterizedThreadStart(func)));
+				listThread.Add(new Thread(new ParameterizedThreadStart(FuncHorizontally)));
 				listThread[listThread.Count - 1].Start(new Limit(i, i + step));
 			}
 
