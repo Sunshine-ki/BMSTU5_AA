@@ -116,7 +116,8 @@ namespace Newton
 			// (то есть те потоки, которые мы джоиним.).
 			foreach (var elem in listThread)
 			{
-				elem.Join();
+				if (elem.IsAlive())
+					elem.Join();
 			}
 
 			_imgBox.Image = _img;
