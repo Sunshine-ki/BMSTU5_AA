@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Collections.Generic;
 
+using System.Diagnostics;
 using System.Threading;
 
 namespace Newton
@@ -70,8 +71,44 @@ namespace Newton
 
 		private void ButtonOffOnClick(object sender, System.EventArgs e)
 		{
-			DrawScene();
+			// // int[] arrCount = { 1200, 600, 300, 150, 75 };
+
+			Stopwatch stopWatch = new Stopwatch();
+			stopWatch.Start();
+			for (int j = 0; j < 50; j++)
+				FuncTrace();
+			stopWatch.Stop();
+			TimeSpan ts = stopWatch.Elapsed;
+			Console.WriteLine(ts.Seconds + "." + ts.Milliseconds);
+
+
+			// List<string> listTime = new List<string>();
+
+			// Stopwatch stopWatch = new Stopwatch();
+			// TimeSpan ts;
+
+			// // int[] arrCount = { 1200, 600, 300, 150, 75 };
+			// int[] arrCount = { 75, 150, 300, 600, 1200 };
+
+			// foreach (var elem in arrCount)
+			// {
+			// 	stopWatch.Start();
+			// 	for (int j = 0; j < 10; j++)
+			// 		DrawScene(elem);
+			// 	stopWatch.Stop();
+			// 	ts = stopWatch.Elapsed;
+			// 	listTime.Add(ts.Seconds + "." + ts.Milliseconds);
+			// }
+
+			// foreach (var elem in listTime)
+			// 	Console.WriteLine(elem);
 		}
+
+		// 1.169
+		// 2.217
+		// 3.91
+		// 3.853
+		// 4.581
 
 
 		public void FuncHorizontally(object obj)
@@ -99,16 +136,16 @@ namespace Newton
 			_imgBox.Image = _img;
 		}
 
-		private void DrawScene()
+		private void DrawScene(int step)
 		{
 			List<Thread> listThread = new List<Thread>();
 
-			int step = 200;
-			for (int i = 0; i < (int)SizeObjects.WidthCanvas; i += step)
+			for (int i = 0; i < (int)SizeObjects.WidthCanvas - 16; i += step)
 			{
 				listThread.Add(new Thread(new ParameterizedThreadStart(FuncHorizontally)));
 				listThread[listThread.Count - 1].Start(new Limit(i, i + step));
 			}
+
 
 			// Join — Это метод синхронизации, который блокирует вызывающий поток (то есть поток, который вызывает метод).
 			// Используйте этот метод, чтобы убедиться, что поток был завершен.
@@ -116,8 +153,8 @@ namespace Newton
 			// (то есть те потоки, которые мы джоиним.).
 			foreach (var elem in listThread)
 			{
-				if (elem.IsAlive())
-					elem.Join();
+				// if (elem.ThreadState != System.Threading.ThreadState.Unstarted)
+				elem.Join();
 			}
 
 			_imgBox.Image = _img;

@@ -1,34 +1,59 @@
 using System;
+using System.Diagnostics;
 using System.Threading;
 class Program
 {
-	static Mutex mutexObj = new Mutex();
-	static int x = 0;
-
 	static void Main(string[] args)
 	{
-		for (int i = 0; i < 5; i++)
-		{
-			Thread myThread = new Thread(Count);
-			myThread.Name = $"Поток {i}";
-			myThread.Start();
-		}
+		Stopwatch stopWatch = new Stopwatch();
+		stopWatch.Start();
+		Thread.Sleep(2900);
+		stopWatch.Stop();
+		// Get the elapsed time as a TimeSpan value.
+		TimeSpan ts = stopWatch.Elapsed;
 
-		Console.ReadLine();
-	}
-	public static void Count()
-	{
-		mutexObj.WaitOne();
-		x = 1;
-		for (int i = 1; i < 9; i++)
-		{
-			Console.WriteLine($"{Thread.CurrentThread.Name}: {x}");
-			x++;
-			Thread.Sleep(100);
-		}
-		mutexObj.ReleaseMutex();
+		Console.WriteLine(ts.Seconds + "." + ts.Milliseconds);
+		Console.WriteLine(ts);
+
+		// Format and display the TimeSpan value.
+		string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
+			ts.Hours, ts.Minutes, ts.Seconds,
+			ts.Milliseconds / 10);
+		Console.WriteLine("RunTime " + elapsedTime);
 	}
 }
+
+// using System;
+// using System.Threading;
+// class Program
+// {
+// 	static Mutex mutexObj = new Mutex();
+// 	static int x = 0;
+
+// 	static void Main(string[] args)
+// 	{
+// 		for (int i = 0; i < 5; i++)
+// 		{
+// 			Thread myThread = new Thread(Count);
+// 			myThread.Name = $"Поток {i}";
+// 			myThread.Start();
+// 		}
+
+// 		Console.ReadLine();
+// 	}
+// 	public static void Count()
+// 	{
+// 		mutexObj.WaitOne();
+// 		x = 1;
+// 		for (int i = 1; i < 9; i++)
+// 		{
+// 			Console.WriteLine($"{Thread.CurrentThread.Name}: {x}");
+// 			x++;
+// 			Thread.Sleep(100);
+// 		}
+// 		mutexObj.ReleaseMutex();
+// 	}
+// }
 // class Program
 // {
 // 	static void Main(string[] args)
