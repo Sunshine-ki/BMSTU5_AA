@@ -267,8 +267,6 @@ INPUT /home/lis/university/github/algorithm/lab_04/report/5-research.aux
 INPUT /home/lis/university/github/algorithm/lab_04/report/5-research.aux
 INPUT /home/lis/university/github/algorithm/lab_04/report/60-conclusion.aux
 INPUT /home/lis/university/github/algorithm/lab_04/report/60-conclusion.aux
-INPUT /home/lis/university/github/algorithm/lab_04/report/61-biblio.aux
-INPUT /home/lis/university/github/algorithm/lab_04/report/61-biblio.aux
 OUTPUT /home/lis/university/github/algorithm/lab_04/report/report.aux
 INPUT /usr/share/texlive/texmf-dist/tex/latex/ucs/ucsencs.def
 INPUT /usr/share/texlive/texmf-dist/tex/latex/ucs/ucsencs.def
@@ -407,18 +405,12 @@ INPUT /home/lis/university/github/algorithm/lab_04/report/img/res.png
 OUTPUT /home/lis/university/github/algorithm/lab_04/report/5-research.aux
 INPUT /home/lis/university/github/algorithm/lab_04/report/5-research.tex
 INPUT /home/lis/university/github/algorithm/lab_04/report/5-research.tex
+INPUT /home/lis/university/github/algorithm/lab_04/report/img/time.png
+INPUT /home/lis/university/github/algorithm/lab_04/report/img/time.png
+INPUT /home/lis/university/github/algorithm/lab_04/report/img/time.png
 OUTPUT /home/lis/university/github/algorithm/lab_04/report/60-conclusion.aux
 INPUT /home/lis/university/github/algorithm/lab_04/report/60-conclusion.tex
 INPUT /home/lis/university/github/algorithm/lab_04/report/60-conclusion.tex
-OUTPUT /home/lis/university/github/algorithm/lab_04/report/61-biblio.aux
-INPUT /home/lis/university/github/algorithm/lab_04/report/61-biblio.tex
-INPUT /home/lis/university/github/algorithm/lab_04/report/61-biblio.tex
-INPUT /home/lis/university/github/algorithm/lab_04/report/report.bbl
-INPUT /home/lis/university/github/algorithm/lab_04/report/report.bbl
-INPUT /home/lis/.texlive2017/texmf-var/fonts/tfm/lh/lh-t2a/lati1200.tfm
-INPUT /usr/share/texlive/texmf-dist/tex/latex/cyrillic/t2acmtt.fd
-INPUT /usr/share/texlive/texmf-dist/tex/latex/cyrillic/t2acmtt.fd
-INPUT /home/lis/.texlive2017/texmf-var/fonts/tfm/lh/lh-t2a/latt1200.tfm
 INPUT /home/lis/university/github/algorithm/lab_04/report/report.aux
 INPUT /home/lis/university/github/algorithm/lab_04/report/00-abstract.aux
 INPUT /home/lis/university/github/algorithm/lab_04/report/00-abstract.aux
@@ -434,8 +426,6 @@ INPUT /home/lis/university/github/algorithm/lab_04/report/5-research.aux
 INPUT /home/lis/university/github/algorithm/lab_04/report/5-research.aux
 INPUT /home/lis/university/github/algorithm/lab_04/report/60-conclusion.aux
 INPUT /home/lis/university/github/algorithm/lab_04/report/60-conclusion.aux
-INPUT /home/lis/university/github/algorithm/lab_04/report/61-biblio.aux
-INPUT /home/lis/university/github/algorithm/lab_04/report/61-biblio.aux
 INPUT /home/lis/university/github/algorithm/lab_04/report/report.out
 INPUT /home/lis/university/github/algorithm/lab_04/report/report.out
 INPUT /usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t2a.enc
@@ -444,5 +434,3 @@ INPUT /usr/share/texmf/fonts/type1/public/cm-super/sfbx1200.pfb
 INPUT /usr/share/texmf/fonts/type1/public/cm-super/sfbx1440.pfb
 INPUT /usr/share/texmf/fonts/type1/public/cm-super/sfrm1000.pfb
 INPUT /usr/share/texmf/fonts/type1/public/cm-super/sfrm1200.pfb
-INPUT /usr/share/texmf/fonts/type1/public/cm-super/sfti1200.pfb
-INPUT /usr/share/texmf/fonts/type1/public/cm-super/sftt1200.pfb

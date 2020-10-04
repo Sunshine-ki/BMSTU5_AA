@@ -653,7 +653,7 @@ FUNCTION {output.bibitem}
   "}" write$
   newline$
   language empty$
-    {"english" 'curlanguage :=}
+    {"russian" 'curlanguage :=}
     {language  'curlanguage :=}
   if$
   "\selectlanguageifdefined{" write$
