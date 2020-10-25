@@ -25,13 +25,15 @@ def main():
     matrixC = multiplication(matrixA, matrixB)
     print('multiplication')
     matrixC.output()
+    matrixC2 = WinogradOptimization(matrixA, matrixB)
+    print('multiplication 2:')
+    matrixC2.output()
     # matrixC = WinogradMult(matrixA, matrixB)
     # print('Winograd multiplication')
     # matrixC.output()
     # matrixC = WinogradOptimization(matrixA, matrixB)
     # print('WinogradOptimization')
     # matrixC.output()
-
 
 
 if __name__ == "__main__":

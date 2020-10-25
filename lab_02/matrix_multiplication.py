@@ -48,6 +48,9 @@ def WinogradMult(matrixA, matrixB):
     return matrixC
 
 
+print(0b11)
+
+
 def WinogradOptimization(matrixA, matrixB):
     n = matrixA.n
     m = matrixB.m
@@ -64,7 +67,7 @@ def WinogradOptimization(matrixA, matrixB):
 
     tempB = [0 for i in range(m)]
     for i in range(m):
-        for j in range(0b1, q, 0b11):
+        for j in range(0b1, q, 0b10):
             tempB[i] += matrixB[j - 1][i] * matrixB[j][i]
 
     for i in range(n):
