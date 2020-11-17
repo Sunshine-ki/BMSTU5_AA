@@ -1,6 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.IO;
 using System.Threading;
+using System.Collections.Generic;
 
 using intPtr = System.Collections.Generic.List<int>;
 
@@ -8,6 +9,12 @@ namespace src
 {
 	class Program
 	{
+		static object firstStage = new object();
+		static object secondStage = new object();
+		static object thirdStage = new object();
+
+		public const double operationsCount = 5000;
+
 		public static intPtr CreateRandomArray(int n)
 		{
 			intPtr array = new intPtr();
@@ -33,9 +40,10 @@ namespace src
 		{
 			int max = array[0];
 
-			foreach (var elem in array)
-				if (elem > max)
-					max = elem;
+			for (int i = 0; i < operationsCount; i++)
+				foreach (var elem in array)
+					if (elem > max)
+						max = elem;
 
 			return max;
 		}
@@ -44,9 +52,10 @@ namespace src
 		{
 			int min = array[0];
 
-			foreach (var elem in array)
-				if (elem < min)
-					min = elem;
+			for (int i = 0; i < operationsCount; i++)
+				foreach (var elem in array)
+					if (elem < min)
+						min = elem;
 
 			return min;
 		}
@@ -56,9 +65,10 @@ namespace src
 		{
 			int count = 0;
 
-			foreach (var elem in array)
-				if (elem < num)
-					count++;
+			for (int i = 0; i < operationsCount; i++)
+				foreach (var elem in array)
+					if (elem < num)
+						count++;
 
 			return count;
 		}
@@ -101,78 +111,168 @@ namespace src
 		public static void Conveyor(object obj)
 		{
 			// Получили очереди.
-			ThreadArgs queues = (ThreadArgs)obj;
-			int max, min;
+			ThreadArgs args = (ThreadArgs)obj;
+			int max, min, count;
 			intPtr array;
 
-			lock (queues.firstQueue)
+			lock (args.firstQueue)
 			{
 				// Из первой очереди получили элемент.
-				array = queues.firstQueue.Dequeue();
-				// Нашли max.
-				max = FindMax(array);
-				Console.WriteLine("Max: {0}", max);
+				array = args.firstQueue.Dequeue();
 			}
 
-			// Положили во вторую очередь.
-
-			lock (queues.secondQueue)
+			lock (firstStage)
 			{
-				queues.secondQueue.Enqueue(array);
+				// Замеряем время начала работы на первой ленте.
+				Console.WriteLine("Лента 1 начало {0}", DateTime.Now.Ticks);
+				// args.t1.Add(DateTime.Now.Ticks);
 
+				// Работает первая лента.
+				max = FindMax(array);
 
-				// Получили из второй очереди элемент.
-				array = queues.secondQueue.Dequeue();
-				// Нашли min.
-				min = FindMin(array);
-				Console.WriteLine("Min: {0}\n", min);
+				// Замеряем время конца работы на первой ленте.
+				Console.WriteLine("Лента 1 конец {0}", DateTime.Now.Ticks);
+				// args.t2.Add(DateTime.Now.Ticks);
 			}
 
-			Console.WriteLine("Queues:\n");
-			PrintQueue(queues.firstQueue);
-			PrintQueue(queues.secondQueue);
-			PrintQueue(queues.thirdQueue);
-			Console.WriteLine("End");
 
+			lock (args.secondQueue)
+			{
+				// Добавили во вторую очередь элемент.
+				args.secondQueue.Enqueue(array);
+			}
+
+			// Console.WriteLine("Тут должна быть очередь.{0}\n", args.secondQueue.Count);
+
+			lock (secondStage)
+			{
+				Console.WriteLine("Лента 2 начало {0}", DateTime.Now.Ticks);
+				// args.t3.Add(DateTime.Now.Ticks);
+
+				// Работает вторая лента.
+				lock (args.secondQueue)
+				{
+					// Получили из второй очереди элемент.
+					array = args.secondQueue.Dequeue();
+				}
+
+				min = FindMin(array);
+
+				Console.WriteLine("Лента 2 конец {0}", DateTime.Now.Ticks);
+				// args.t4.Add(DateTime.Now.Ticks);
+			}
+
+			lock (args.thirdQueue)
+			{
+				// Добавили элемент в третью очередь.
+				args.thirdQueue.Enqueue(array);
+			}
+
+			lock (thirdStage)
+			{
+				Console.WriteLine("Лента 3 начало {0}", DateTime.Now.Ticks);
+				// args.t5.Add(DateTime.Now.Ticks);
+
+				// Работает третья лента.
+				lock (args.thirdQueue)
+				{
+					// Получили из третьей очереди элемент.
+					array = args.thirdQueue.Dequeue();
+				}
+
+				count = FindCount(array, (max - min) / 2);
+
+				Console.WriteLine("Лента 3 конец {0}", DateTime.Now.Ticks);
+				// args.t6.Add(DateTime.Now.Ticks);
+			}
+		}
+
+		public static void log(ThreadArgs args) // Запись в файл.
+		{
+			StreamWriter writer = new StreamWriter("times.txt");
+			// writer.WriteLine("TIMES:\n");
+			// writer.WriteLine("TIMES:\n");
+
+			for (int i = 0; i < args.t1.Count; i++)
+			{
+				writer.WriteLine("Time 1 (elem index: {0} ): {1}", i + 1, args.t1[i]);
+				writer.WriteLine("Time 2 (elem index: {0} ): {1}", i + 1, args.t2[i]);
+				writer.WriteLine("Time 3 (elem index: {0} ): {1}", i + 1, args.t3[i]);
+				writer.WriteLine("Time 4 (elem index: {0} ): {1}", i + 1, args.t4[i]);
+				writer.WriteLine("Time 5 (elem index: {0} ): {1}", i + 1, args.t5[i]);
+				writer.WriteLine("Time 6 (elem index: {0} ): {1}", i + 1, args.t6[i]);
+			}
+
+			writer.Close();
 		}
 
 		public static void MainTread(Queue<intPtr> queue)
 		{
-			Console.WriteLine("\nBegin:\n");
-			PrintQueue(queue);
+			// Console.WriteLine("\nBegin:\n");
+			// PrintQueue(queue);
 			Console.WriteLine("Process:\n");
 
 			ThreadArgs args = new ThreadArgs(queue);
 
-			Thread myThread = new Thread(new ParameterizedThreadStart(Conveyor));
-			myThread.Start(args);
+			Thread firstThread = new Thread(new ParameterizedThreadStart(Conveyor));
+			Thread secondThread = new Thread(new ParameterizedThreadStart(Conveyor));
+			Thread thirdThread = new Thread(new ParameterizedThreadStart(Conveyor));
 
-			// myThread.Join();
-
-			// Console.WriteLine("Queues:\n");
-			// PrintQueue(args.firstQueue);
-			// PrintQueue(args.secondQueue);
-			// PrintQueue(args.thirdQueue);
-			// Console.WriteLine("End");
+			firstThread.Start(args);
+			secondThread.Start(args);
+			thirdThread.Start(args);
 
 
-			Thread myThread2 = new Thread(new ParameterizedThreadStart(Conveyor));
-			myThread2.Start(args);
+			while (args.firstQueue.Count != 0) // && args.secondQueue.Count != 0 && args.thirdQueue.Count != 0)
+			{
+				if (!firstThread.IsAlive)
+				{
+					firstThread = new Thread(new ParameterizedThreadStart(Conveyor));
+					firstThread.Start(args);
+				}
+
+				if (!secondThread.IsAlive)
+				{
+					secondThread = new Thread(new ParameterizedThreadStart(Conveyor));
+					secondThread.Start(args);
+				}
+
+				if (!thirdThread.IsAlive)
+				{
+					thirdThread = new Thread(new ParameterizedThreadStart(Conveyor));
+					thirdThread.Start(args);
+				}
+			}
+
+			// Console.WriteLine("STATUS: 1: {0}, 2: {1}, 3: {2}\n", firstThread.IsAlive, secondThread.IsAlive, thirdThread.IsAlive);
+			firstThread.Join(); secondThread.Join(); thirdThread.Join();
+			// Console.WriteLine("STATUS (после): 1: {0}, 2: {1}, 3: {2}\n", firstThread.IsAlive, secondThread.IsAlive, thirdThread.IsAlive);
+			// log(args);
 		}
-
 	}
 
 	public class ThreadArgs
 	{
-		// TODO: 
-		// ThreadArgs - будет содержать 2 объекта:
-		// Первый это очереди;
-		// Второй это замеры времени.
 		public Queue<intPtr> firstQueue = null;
 		public Queue<intPtr> secondQueue = new Queue<intPtr>();
 		public Queue<intPtr> thirdQueue = new Queue<intPtr>();
 
-		public ThreadArgs(Queue<intPtr> queue) => firstQueue = queue;
+		public List<Int64> t1, t2, t3, t4, t5, t6;
+
+		// Int64 t2 = DateTime.Now.Ticks;
+		// Console.WriteLine("T1: {0}\nT2: {1}\nT2-T1: {2}", t1, t2, t2 - t1);
+
+		public ThreadArgs(Queue<intPtr> queue)
+		{
+			firstQueue = queue;
+
+			t1 = new List<Int64>();
+			t2 = new List<Int64>();
+			t3 = new List<Int64>();
+			t4 = new List<Int64>();
+			t5 = new List<Int64>();
+			t6 = new List<Int64>();
+		}
 	}
 }
 
