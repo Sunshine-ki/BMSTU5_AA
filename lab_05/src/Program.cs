@@ -99,7 +99,6 @@ namespace src
 			Console.WriteLine("Input array count: ");
 			int count = Convert.ToInt32(Console.ReadLine());
 
-
 			Console.WriteLine("Input array length: ");
 			int n = Convert.ToInt32(Console.ReadLine());
 
@@ -124,14 +123,14 @@ namespace src
 			lock (firstStage)
 			{
 				// Замеряем время начала работы на первой ленте.
-				Console.WriteLine("Лента 1 начало {0}", DateTime.Now.Ticks);
+				Console.WriteLine("Лента 1 начало {0}    {1}", Thread.CurrentThread.Name, DateTime.Now.Ticks);
 				// args.t1.Add(DateTime.Now.Ticks);
 
 				// Работает первая лента.
 				max = FindMax(array);
 
 				// Замеряем время конца работы на первой ленте.
-				Console.WriteLine("Лента 1 конец {0}", DateTime.Now.Ticks);
+				Console.WriteLine("Лента 1 конец  {0}    {1}", Thread.CurrentThread.Name, DateTime.Now.Ticks);
 				// args.t2.Add(DateTime.Now.Ticks);
 			}
 
@@ -146,7 +145,7 @@ namespace src
 
 			lock (secondStage)
 			{
-				Console.WriteLine("Лента 2 начало {0}", DateTime.Now.Ticks);
+				Console.WriteLine("Лента 2 начало {0}    {1}", Thread.CurrentThread.Name, DateTime.Now.Ticks);
 				// args.t3.Add(DateTime.Now.Ticks);
 
 				// Работает вторая лента.
@@ -158,7 +157,7 @@ namespace src
 
 				min = FindMin(array);
 
-				Console.WriteLine("Лента 2 конец {0}", DateTime.Now.Ticks);
+				Console.WriteLine("Лента 2 конец  {0}    {1}", Thread.CurrentThread.Name, DateTime.Now.Ticks);
 				// args.t4.Add(DateTime.Now.Ticks);
 			}
 
@@ -170,7 +169,7 @@ namespace src
 
 			lock (thirdStage)
 			{
-				Console.WriteLine("Лента 3 начало {0}", DateTime.Now.Ticks);
+				Console.WriteLine("Лента 3 начало {0}    {1}", Thread.CurrentThread.Name, DateTime.Now.Ticks);
 				// args.t5.Add(DateTime.Now.Ticks);
 
 				// Работает третья лента.
@@ -182,7 +181,7 @@ namespace src
 
 				count = FindCount(array, (max - min) / 2);
 
-				Console.WriteLine("Лента 3 конец {0}", DateTime.Now.Ticks);
+				Console.WriteLine("Лента 3 конец  {0}    {1}", Thread.CurrentThread.Name, DateTime.Now.Ticks);
 				// args.t6.Add(DateTime.Now.Ticks);
 			}
 		}
@@ -208,15 +207,39 @@ namespace src
 
 		public static void MainTread(Queue<intPtr> queue)
 		{
+			Int64 t1, t2;
+
+			// t1 = DateTime.Now.Ticks;
+			// int max, min, count;
+
+			// foreach (var elem in queue)
+			// {
+			// 	max = FindMax(elem);
+			// 	min = FindMin(elem);
+			// 	count = FindCount(elem, (max - min) / 2);
+			// }
+
+			// t2 = DateTime.Now.Ticks;
+
+			// Console.WriteLine("Простая реализация: {0}\n", t2 - t1);
+
+
 			// Console.WriteLine("\nBegin:\n");
 			// PrintQueue(queue);
 			Console.WriteLine("Process:\n");
 
+			t1 = DateTime.Now.Ticks;
+
 			ThreadArgs args = new ThreadArgs(queue);
 
 			Thread firstThread = new Thread(new ParameterizedThreadStart(Conveyor));
+			firstThread.Name = "Поток 1";
+
 			Thread secondThread = new Thread(new ParameterizedThreadStart(Conveyor));
+			secondThread.Name = "Поток 2";
+
 			Thread thirdThread = new Thread(new ParameterizedThreadStart(Conveyor));
+			thirdThread.Name = "Поток 3";
 
 			firstThread.Start(args);
 			secondThread.Start(args);
@@ -228,18 +251,21 @@ namespace src
 				if (!firstThread.IsAlive)
 				{
 					firstThread = new Thread(new ParameterizedThreadStart(Conveyor));
+					firstThread.Name = "Поток 1";
 					firstThread.Start(args);
 				}
 
 				if (!secondThread.IsAlive)
 				{
 					secondThread = new Thread(new ParameterizedThreadStart(Conveyor));
+					secondThread.Name = "Поток 2";
 					secondThread.Start(args);
 				}
 
 				if (!thirdThread.IsAlive)
 				{
 					thirdThread = new Thread(new ParameterizedThreadStart(Conveyor));
+					thirdThread.Name = "Поток 3";
 					thirdThread.Start(args);
 				}
 			}
@@ -248,6 +274,10 @@ namespace src
 			firstThread.Join(); secondThread.Join(); thirdThread.Join();
 			// Console.WriteLine("STATUS (после): 1: {0}, 2: {1}, 3: {2}\n", firstThread.IsAlive, secondThread.IsAlive, thirdThread.IsAlive);
 			// log(args);
+
+			t2 = DateTime.Now.Ticks;
+
+			Console.WriteLine("Конвейер: {0}\n", t2 - t1);
 		}
 	}
 
@@ -276,3 +306,6 @@ namespace src
 	}
 }
 
+// len = [5, 10, 25, 50, 100, 250, 500, 1000]
+// simple = [270590, 314050, 514440, 728090, 1009860, 1977800, 4029610, 17623210]
+// conveyor = [420310, 472230, 485870, 593570, 630730, 1160250, 2182050, 4552170]

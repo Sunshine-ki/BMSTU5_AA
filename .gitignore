@@ -4,3 +4,5 @@
 *.toc
 *.dvi
 *.gz
+*.exe
+*.out
