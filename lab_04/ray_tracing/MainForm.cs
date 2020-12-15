@@ -71,15 +71,18 @@ namespace Newton
 
 		private void ButtonOffOnClick(object sender, System.EventArgs e)
 		{
+			DrawScene(150);
+
 			// // int[] arrCount = { 1200, 600, 300, 150, 75 };
 
-			Stopwatch stopWatch = new Stopwatch();
-			stopWatch.Start();
-			for (int j = 0; j < 50; j++)
-				FuncTrace();
-			stopWatch.Stop();
-			TimeSpan ts = stopWatch.Elapsed;
-			Console.WriteLine(ts.Seconds + "." + ts.Milliseconds);
+			// Stopwatch stopWatch = new Stopwatch();
+			// stopWatch.Start();
+			// // for (int j = 0; j < 50; j++)
+			// FuncTrace();
+			
+			// stopWatch.Stop();
+			// TimeSpan ts = stopWatch.Elapsed;
+			// Console.WriteLine(ts.Seconds + "." + ts.Milliseconds);
 
 
 			// List<string> listTime = new List<string>();
@@ -103,14 +106,6 @@ namespace Newton
 			// foreach (var elem in listTime)
 			// 	Console.WriteLine(elem);
 		}
-
-		// 1.169
-		// 2.217
-		// 3.91
-		// 3.853
-		// 4.581
-
-
 		public void FuncHorizontally(object obj)
 		{
 			Limit limit = (Limit)obj;
@@ -185,6 +180,7 @@ namespace Newton
 		}
 		private bool IsVisible(double R, double dx, double dy)
 		{
+			// Это неправильное пересечение (но для лабы и это пойдет)
 			if (Math.Pow(dx, 2.0d) + Math.Pow(dy, 2.0d) <= R * R)
 				return true;
 			return false;
