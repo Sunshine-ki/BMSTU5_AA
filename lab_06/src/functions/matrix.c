@@ -1,11 +1,13 @@
 #include <stdio.h>
 
 #include "matrix.h"
+#include "colors.h"
 
 void print_matrix(int matrix[LEN][LEN], int const count)
 {
 	// printf("count: %d\n  ", count);
 
+	blue();
 	for (int i = 0; i < count; i++)
 		printf("%d\t", i);
 	puts("");

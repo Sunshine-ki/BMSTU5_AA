@@ -1,6 +1,6 @@
-#ifndef COLORS_H
+#ifndef _COLORS_H_
 
-#define COLORS_H
+#define _COLORS_H_
 
 #define red() printf("\33[31m")
 #define green() printf("\33[32m")

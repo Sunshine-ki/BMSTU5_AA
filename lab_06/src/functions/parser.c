@@ -37,3 +37,47 @@ int parser(FILE *f, char cities[LEN], int matrix[LEN][LEN])
 
     return count;
 }
+
+int parser_in_gv(char name_file[MAX_LEN_FILE_NAME], char cities[LEN], int matrix[LEN][LEN], array result, int const count)
+{
+
+    FILE *f = fopen(name_file, "w");
+    char first, second;
+
+    if (!f)
+    {
+        printf("Ошибка при попытки открыть файл.\n");
+        return ERROR_OPEN_FILE;
+    }
+
+    fputs(TEXT_INFO_BEGIN, f);
+
+    int flag = FALSE;
+
+    for (int i = 0; i < count; i++)
+        for (int j = 0; j < i; j++)
+        {
+            first = cities[j];
+            second = cities[i];
+
+            for (int k = 0; k < result.count - 1; k++)
+                if ((i == result.arr[k]) && j == (result.arr[k + 1]) || (j == result.arr[k]) && i == (result.arr[k + 1]))
+                    flag = TRUE;
+
+            if (flag)
+                fprintf(f, "    %c -- %c [label=\"%d\", color=red, penwidth=2.0];\n", first, second, matrix[i][j]);
+            else
+                fprintf(f, "    %c -- %c [label=\"%d\"];\n", first, second, matrix[i][j]);
+           
+            flag = FALSE;
+        }
+
+    // for (int i = 0; i < result.count - 1; i++)
+    // fprintf(f, "    %c -- %c [color=red];\n", cities[result.arr[i]], cities[result.arr[i + 1]]);
+
+    fputs(TEXT_INFO_END, f);
+
+    fclose(f);
+
+    return OK;
+}

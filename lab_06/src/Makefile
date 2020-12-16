@@ -15,7 +15,7 @@ functions/%.o: functions/%.c
 	gcc -o $@ -c -I $(HEADERS_DIR) $^ $(CFLAGS)
 
 clean:
-	rm -f *.o *.exe functions/*.o
+	rm -f *.o *.exe functions/*.o result/*.png
 
 run:
 	./app.exe
