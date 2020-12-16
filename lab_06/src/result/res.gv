@@ -1,7 +1,0 @@
-graph graphname {
-     a -- b;
-     a -- c;
-     d -- c;
-     d -- b;
-     d -- a;
-}

@@ -5,7 +5,6 @@ HEADERS_DIR := headers/
 
 app.exe:  main.o $(FILE_O)
 	gcc -o app.exe $^  $(CFLAGS)
-	rm -f *.o functions/*.o
 
 
 %.o: %.c
@@ -18,4 +17,4 @@ clean:
 	rm -f *.o *.exe functions/*.o result/*.png
 
 run:
-	./app.exe
+	./app.exe graph/graph.gv

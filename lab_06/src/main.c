@@ -17,14 +17,14 @@
 #include "city.h"
 #include "array.h"
 
-int main()
+int main(int argc, char * argv[])
 {
     array cities; // Города представленые индексами.
 
     char city_names[LEN]; // Города представленые буквами.
     int matrix[LEN][LEN]; // матрица смежности
 
-    FILE *f = fopen(FILE_NAME, "r");
+    FILE *f = fopen(argv[1], "r");
 
     if (!f)
     {

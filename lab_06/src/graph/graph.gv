@@ -3,12 +3,12 @@ graph G
     edge[color="gray54",fontcolor="blue",fontsize=12, len=3];
     node[color="indigo",fontsize=14, shape="septagon"];
 
-    a -- b [label="10"];
-    b -- c [label="20"];
-    c -- d [label="15"];
-    d -- e [label="12"];
-    e -- f [label="21"];
-    a -- f [label="23"];
+    a -- b [label="1"];
+    b -- c [label="1"];
+    c -- d [label="1"];
+    d -- e [label="1"];
+    e -- f [label="2"];
+    a -- f [label="15"];
     a -- c [label="10"];
     a -- d [label="7"];
     a -- e [label="5"];
@@ -16,6 +16,6 @@ graph G
     b -- e [label="11"];
     b -- f [label="10"];
     c -- e [label="18"];
-    c -- f [label="25"];
+    c -- f [label="2"];
     d -- f [label="24"];
 }

@@ -15,16 +15,19 @@
 #define ERROR_OPEN_FILE -1
 #define ERROR_EXEC -1
 
-#define DEPTH_OF_RECURSION 150
+#define DEPTH_OF_RECURSION 1500
 
 #define MAX_LEN_FILE_NAME 32
 #define MSG_LEN 32
 
-#define FILE_NAME "graph/graph.gv" // "graph/three.gv" //  // "graph/grh2.gv"
+// #define FILE_NAME "graph/graph.gv" // "graph/three.gv" //  // "graph/grh2.gv"
 
-#define OPEN_RESULT_FILE "xdg-open result/result.png"
-#define CREATE_RESULT_FILE "sfdp -Tpng result/result.gv -o result/result.png"
+
 #define RESULT_FILE_NAME "result/result.gv"
+#define RESULT_FILE_NAME_PNG "result/result.png"
+
+#define CREATE_RESULT_FILE "sfdp -Tpng " RESULT_FILE_NAME " -o " RESULT_FILE_NAME_PNG
+#define OPEN_RESULT_FILE "xdg-open " RESULT_FILE_NAME_PNG
 
 #define TEXT_INFO_BEGIN "\
 graph G\n\
