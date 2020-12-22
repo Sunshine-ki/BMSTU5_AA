@@ -21,3 +21,10 @@ void print_matrix(int matrix[LEN][LEN], int const count)
 	}
 	puts("");
 }
+
+void fill_matrix(float matrix[LEN][LEN], int count, float num)
+{
+	for (int i = 0; i < count; i++)
+		for (int j = 0; j < i; j++)
+			matrix[i][j] = matrix[j][i] = num;
+}

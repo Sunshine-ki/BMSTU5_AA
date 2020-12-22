@@ -16,8 +16,9 @@
 #include "parser.h"
 #include "city.h"
 #include "array.h"
+#include "ant_algorithm.h"
 
-int main(int argc, char * argv[])
+int main(int argc, char *argv[])
 {
     array cities; // Города представленые индексами.
 
@@ -44,6 +45,9 @@ int main(int argc, char * argv[])
     array result = get_shortest_path(cities, matrix);
 
     print_cities(result, city_names);
+
+    ant_algorithm(matrix, count, cities, 50, 0.4, 0.7, 0.3);
+
 
     parser_in_gv(RESULT_FILE_NAME, city_names, matrix, result, count);
 

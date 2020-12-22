@@ -22,6 +22,7 @@
 
 // #define FILE_NAME "graph/graph.gv" // "graph/three.gv" //  // "graph/grh2.gv"
 
+#define PHEROMONE_MIN 0.1
 
 #define RESULT_FILE_NAME "result/result.gv"
 #define RESULT_FILE_NAME_PNG "result/result.png"
