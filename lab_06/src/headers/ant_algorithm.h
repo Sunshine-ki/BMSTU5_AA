@@ -5,7 +5,7 @@
 #include "define.h"
 #include "array.h"
 
-array ant_algorithm(int matrix[LEN][LEN], int count, array cities, int tmax, int p, int alpha, int beta);
+array ant_algorithm(int matrix[LEN][LEN], int count, array cities, int tmax, float p, float alpha, float beta);
 
 int calculate_Q(int matrix[LEN][LEN], int count);
 

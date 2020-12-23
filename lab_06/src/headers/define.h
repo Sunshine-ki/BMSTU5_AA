@@ -17,8 +17,11 @@
 
 #define DEPTH_OF_RECURSION 1500
 
+#define ANTS_MAX_COUNT 100
+
 #define MAX_LEN_FILE_NAME 32
 #define MSG_LEN 32
+
 
 // #define FILE_NAME "graph/graph.gv" // "graph/three.gv" //  // "graph/grh2.gv"
 

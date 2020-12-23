@@ -18,4 +18,10 @@ typedef struct
 	// int cost;
 } ant;
 
+void next_city(ant ants[ANTS_MAX_COUNT], float matrix_pheromones[LEN][LEN], int matrix[LEN][LEN], int count, float alpha, float beta);
+
+void generate_ants_array(ant ants[ANTS_MAX_COUNT], int count);
+
+void print_ants(ant ants[ANTS_MAX_COUNT], int count);
+
 #endif

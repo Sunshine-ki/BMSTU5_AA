@@ -20,6 +20,9 @@
 
 int main(int argc, char *argv[])
 {
+    srand(time(NULL));
+    // srand(_getpid());
+
     array cities; // Города представленые индексами.
 
     char city_names[LEN]; // Города представленые буквами.
@@ -49,10 +52,10 @@ int main(int argc, char *argv[])
     ant_algorithm(matrix, count, cities, 50, 0.4, 0.7, 0.3);
 
 
-    parser_in_gv(RESULT_FILE_NAME, city_names, matrix, result, count);
+    // parser_in_gv(RESULT_FILE_NAME, city_names, matrix, result, count);
 
-    system(CREATE_RESULT_FILE);
-    system(OPEN_RESULT_FILE);
+    // system(CREATE_RESULT_FILE);
+    // system(OPEN_RESULT_FILE);
 
     return OK;
 }

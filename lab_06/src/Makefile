@@ -1,5 +1,5 @@
 # CFLAGS := -std=c99 -Wall -Werror -pedantic -std=c99 -lm -g
-CFLAGS := -std=c99
+CFLAGS := -std=c99 -lm
 FILE_O := $(subst .c,.o,$(wildcard functions/*.c))
 HEADERS_DIR := headers/
 
