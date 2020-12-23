@@ -2,8 +2,9 @@
 #include <stdio.h>
 #include <math.h>
 
-#include "ant.h"
+#include "colors.h"
 #include "array.h"
+#include "ant.h"
 
 void generate_ants_array(ant ants[ANTS_MAX_COUNT], int count)
 {
@@ -26,8 +27,8 @@ void generate_ants_array(ant ants[ANTS_MAX_COUNT], int count)
 
 void choice_next_city(ant *ants, float matrix_pheromones[LEN][LEN], int matrix[LEN][LEN], float alpha, float beta)
 {
-	print_array(ants->route, "До Curr ants.route");
-	print_array(ants->way, "До Curr ants.way");
+	// print_array(ants->route, "До Curr ants.route");
+	// print_array(ants->way, "До Curr ants.way");
 
 	// printf("alpha = %f, beta = %f\n", alpha, beta);
 	float numerator = 0;
@@ -79,29 +80,29 @@ void choice_next_city(ant *ants, float matrix_pheromones[LEN][LEN], int matrix[L
 	// на значение константы RAND_MAX,
 	// то получится вещественное случайное число от 0 до 1.
 	float x = (float)rand() / RAND_MAX;
-	printf("x = %f\n", x);
+	// printf("x = %f\n", x);
 	int index = 0;
 	while (x >= 0)
 	{
 		x -= p_array[index];
 		index++;
-		printf("x = %f\n", x);
+		// printf("x = %f\n", x);
 
 	}
-	printf("index = %d\n", index);
+	// printf("index = %d\n", index);
 
 	add_elem(&ants->way, get_elem(ants->route, index - 1));
 	del_elem(&ants->route, index - 1);
 
 
-	print_array(ants->route, "После ants.route");
-	print_array(ants->way, "После ants.way");
+	// print_array(ants->route, "После ants.route");
+	// print_array(ants->way, "После ants.way");
 }
 
-// TODO: Передавать ant ants[ANTS_MAX_COUNT]
-// И для всех муравьев вычислять следующий город.
+
+
 // TODO: Учитывать тут, что матрица симметричная?
-void next_city(ant ants[ANTS_MAX_COUNT], float matrix_pheromones[LEN][LEN], int matrix[LEN][LEN], int count, float alpha, float beta)
+void ants_choose_way(ant ants[ANTS_MAX_COUNT], float matrix_pheromones[LEN][LEN], int matrix[LEN][LEN], int count, float alpha, float beta)
 {
 	// Проход по всем муравьям.
 	for (int i = 0; i < count; i++)
@@ -110,6 +111,9 @@ void next_city(ant ants[ANTS_MAX_COUNT], float matrix_pheromones[LEN][LEN], int 
 
 void print_ants(ant ants[ANTS_MAX_COUNT], int count)
 {
+	red();
+	// printf("ants count = %d\n", count);
+	green();
 	for (int i = 0; i < count; i++)
 	{
 		print_array(ants[i].way, "ants[i].way");
