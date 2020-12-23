@@ -87,19 +87,15 @@ void choice_next_city(ant *ants, float matrix_pheromones[LEN][LEN], int matrix[L
 		x -= p_array[index];
 		index++;
 		// printf("x = %f\n", x);
-
 	}
 	// printf("index = %d\n", index);
 
 	add_elem(&ants->way, get_elem(ants->route, index - 1));
 	del_elem(&ants->route, index - 1);
 
-
 	// print_array(ants->route, "После ants.route");
 	// print_array(ants->way, "После ants.way");
 }
-
-
 
 // TODO: Учитывать тут, что матрица симметричная?
 void ants_choose_way(ant ants[ANTS_MAX_COUNT], float matrix_pheromones[LEN][LEN], int matrix[LEN][LEN], int count, float alpha, float beta)
