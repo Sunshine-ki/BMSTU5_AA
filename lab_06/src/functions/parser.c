@@ -38,9 +38,8 @@ int parser(FILE *f, char cities[LEN], int matrix[LEN][LEN])
     return count;
 }
 
-int parser_in_gv(char name_file[MAX_LEN_FILE_NAME], char cities[LEN], int matrix[LEN][LEN], array result, int const count)
+int parser_in_gv(char name_file[MAX_LEN_FILE_NAME], char cities[LEN], int matrix[LEN][LEN], array result, int const count, char clr[MAX_LEN_COLOR])
 {
-
     FILE *f = fopen(name_file, "w");
     char first, second;
 
@@ -65,10 +64,10 @@ int parser_in_gv(char name_file[MAX_LEN_FILE_NAME], char cities[LEN], int matrix
                     flag = TRUE;
 
             if (flag)
-                fprintf(f, "    %c -- %c [label=\"%d\", color=red, penwidth=2.0];\n", first, second, matrix[i][j]);
+                fprintf(f, "    %d -- %d [label=\"%d\", color=%s, penwidth=2.0];\n", i, j, matrix[i][j], clr);
             else
-                fprintf(f, "    %c -- %c [label=\"%d\"];\n", first, second, matrix[i][j]);
-           
+                fprintf(f, "    %d -- %d [label=\"%d\"];\n", i, j, matrix[i][j]);
+
             flag = FALSE;
         }
 

@@ -46,18 +46,24 @@ int main(int argc, char *argv[])
     print_matrix(matrix, count);
 
     array result = get_shortest_path(cities, matrix);
-
+    int min_path_simple = get_path_cost(result, matrix);
+    print_array(result, "result");
     red();
-    printf("RESULT = %d\n", get_path_cost(cities, matrix));
+    printf("result simple = %d\n", min_path_simple);
 
-    print_cities(result, city_names);
+    array result_ant = ant_algorithm(matrix, count, cities, 50, 0.4, 0.7, 0.3);
+    int min_path_ant = get_path_cost(result_ant, matrix);
+    print_array(result_ant, "result ant");
+    red();
+    printf("result ant = %d\n", min_path_ant);
 
-    ant_algorithm(matrix, count, cities, 50, 0.4, 0.7, 0.3);
+    parser_in_gv(RESULT_FILE_NAME_SIMPLE, city_names, matrix, result, count, "red");
+    system(CREATE_RESULT_FILE_SIMPLE);
+    system(OPEN_RESULT_FILE_SIMPLE);
 
-    parser_in_gv(RESULT_FILE_NAME, city_names, matrix, result, count);
-
-    system(CREATE_RESULT_FILE);
-    system(OPEN_RESULT_FILE);
+    parser_in_gv(RESULT_FILE_NAME_ANT, city_names, matrix, result_ant, count, "blue");
+    system(CREATE_RESULT_FILE_ANT);
+    system(OPEN_RESULT_FILE_ANT);
 
     return OK;
 }

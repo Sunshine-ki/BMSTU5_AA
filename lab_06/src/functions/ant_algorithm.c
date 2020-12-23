@@ -84,18 +84,18 @@ void print_matrix_pheromones(float matrix_pheromones[LEN][LEN], int count)
 
 array ant_algorithm(int matrix[LEN][LEN], int count, array cities, int tmax, float p, float alpha, float beta)
 {
-	printf("tmax = %d, p = %f alpha = %f, beta = %f\n", tmax, p, alpha, beta);
+	// printf("tmax = %d, p = %f alpha = %f, beta = %f\n", tmax, p, alpha, beta);
 
 	int Q = calculate_Q(matrix, count);
-	printf("Q = %d\n", Q);
+	// printf("Q = %d\n", Q);
 
 	array best_way = copy_arr(cities);
 	add_elem(&best_way, get_elem(best_way, 0));
-	print_array(best_way, "Начальное best_way");
+	// print_array(best_way, "Начальное best_way");
 
 	int best_cost = get_path_cost(best_way, matrix);
 	int curr_cost = 0;
-	printf("best_cost = %d\n", best_cost);
+	// printf("best_cost = %d\n", best_cost);
 
 	float matrix_pheromones[LEN][LEN];
 	fill_matrix(matrix_pheromones, count, PHEROMONE_MIN);
@@ -158,9 +158,9 @@ array ant_algorithm(int matrix[LEN][LEN], int count, array cities, int tmax, flo
 				best_cost = curr_cost;
 				best_way = copy_arr(ants[i].way);
 
-				red();
-				printf("curr_cost = %d best_cost = %d\n", curr_cost, best_cost);
-				print_array(best_way, "best_way");
+				// red();
+				// printf("curr_cost = %d best_cost = %d\n", curr_cost, best_cost);
+				// print_array(best_way, "best_way");
 			}
 		}
 
@@ -168,4 +168,6 @@ array ant_algorithm(int matrix[LEN][LEN], int count, array cities, int tmax, flo
 		add_pheromones(matrix, matrix_pheromones, count, Q, ants);
 		correct_pheromones(matrix_pheromones, count);
 	}
+
+	return best_way;
 }

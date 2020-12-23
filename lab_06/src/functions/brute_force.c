@@ -49,7 +49,7 @@ array get_shortest_path(array cities, int matrix[LEN][LEN])
 	}
 
 	// printf("min_cost = %d\n", min_cost);
-	print_array(result[index], "Наименьший путь");
+	// print_array(result[index], "Наименьший путь");
 	return result[index];
 }
 

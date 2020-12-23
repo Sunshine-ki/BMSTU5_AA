@@ -17,4 +17,4 @@ clean:
 	rm -f *.o *.exe functions/*.o result/*.png
 
 run:
-	./app.exe graph/three.gv
+	./app.exe graph/graph.gv
