@@ -51,7 +51,7 @@ int main(int argc, char *argv[])
     red();
     printf("result simple = %d\n", min_path_simple);
 
-    array result_ant = ant_algorithm(matrix, count, cities, 40, 0.4, 0.7, 0.3);
+    array result_ant = ant_algorithm(matrix, count, cities, 50, 0.4, 0.7, 0.3);
     int min_path_ant = get_path_cost(result_ant, matrix);
     print_array(result_ant, "result ant");
     red();

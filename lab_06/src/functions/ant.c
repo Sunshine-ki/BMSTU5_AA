@@ -55,7 +55,7 @@ void choice_next_city(ant *ants, float matrix_pheromones[LEN][LEN], int matrix[L
 		// printf("denominator = %f\n", denominator);
 	}
 
-	float p_array[LEN];
+	float p_array[LEN] = {0};
 	float sum = 0;
 	// Считаем вероятности пойти во все доступные города.
 	for (int i = 0; i < ants->route.count; i++)
@@ -63,13 +63,13 @@ void choice_next_city(ant *ants, float matrix_pheromones[LEN][LEN], int matrix[L
 		cost = matrix[city_curr][ants->route.arr[i]];
 		tao = matrix_pheromones[city_curr][ants->route.arr[i]];
 
-		if (!cost)
-			continue;
+		// if (!cost)
+		// 	continue;
 
 		reverse_cost = 1.0 / cost;
 
 		p_array[i] = (powf(tao, alpha) + powf(reverse_cost, beta)) / denominator;
-		sum += p_array[i];
+		// sum += p_array[i];
 
 		// printf("sum = %f p_array[%d] = %f\n", sum, i, p_array[i]);
 	}
